@@ -26,10 +26,9 @@ export default {
   data() {
     return {
       picList: [
-        '/img/36.jpg',
-        '/img/37.jpg',
-        '/img/39.jpg',
-        '/img/38.jpg'
+        '/img/Scene-18.jpg',
+        '/img/Scene-24.jpg',
+        '/img/Scene...8.jpg'
       ],
       currentIndex: 0,
       // isSwiping: false,
@@ -67,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$tab-count: 4;
+$tab-count: 3;
 $transition-duration: 0.8s;
 
 .swipe-view {
