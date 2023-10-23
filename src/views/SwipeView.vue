@@ -43,8 +43,8 @@ export default {
     },
     test() {
       // JavaScript 触发样式改变
-      box.classList.add('move');
       const box = document.querySelector('.rectangle');
+      box.classList.add('move');
       // 一段时间后
       // setTimeout(() => {
       //   box.classList.remove('move');
@@ -145,19 +145,45 @@ $transition-duration: 0.8s;
           border-radius: 4px;
           background-color: #fff;
           position: absolute;
-          left: -4px;
-          transition: transform $transition-duration linear;
+          // left: ;
+          translate: -25%;
+          // transition: transform $transition-duration linear;
+        }
+
+        @mixin indicatorAni($i) {
+          @keyframes strtchAndSlide {
+            0% {
+              width: 16px;
+              left: #{100% * ($i - 1)/5};
+            }
+
+            50% {
+              width: 20px;
+              left: #{100% * ($i - 1)/5};
+            }
+
+            100% {
+              width: 16px;
+              left: #{100% * $i/5};
+            }
+          }
         }
 
         @for $i from 1 through $tab-count {
           .indicator:nth-child(#{$i}).isCurrent~.currentIndicator {
-            transform: translateX(#{100% * ($i - 1)});
+            // transform: translateX(#{100% * ($i - 1)});
+            @include indicatorAni($i);
+            // animation: strtchAndSlide $transition-duration linear;
+
+            &.moving {
+              animation: strtchAndSlide $transition-duration linear;
+            }
           }
         }
 
-        .currentIndicator.moving {
-          animation: stretch $transition-duration linear;
-        }
+        // .currentIndicator.moving {
+        //   animation: stretch $transition-duration linear;
+        // }
 
         @keyframes stretch {
           0% {
