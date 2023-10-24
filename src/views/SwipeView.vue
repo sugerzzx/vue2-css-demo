@@ -205,23 +205,38 @@ $transition-duration: 0.8s;
   .rectangle {
     width: 100px;
     height: 50px;
-    background-color: blue;
+    border-radius: 25px;
+    background-color: rgb(80, 194, 240);
     position: relative;
   }
 
   .rectangle.move {
-    animation: stretchAndMove 3s ease-in-out forwards;
+    animation: stretchAndMove 1s ease-in-out forwards;
   }
 
   @keyframes stretchAndMove {
     0% {
       width: 100px;
-      left: 0;
+      // left: 0;
+      translate: 0;
+    }
+
+    25% {
+      width: 150px;
+      // left: 50px;
+      translate: 50px;
     }
 
     50% {
       width: 200px;
-      left: 0px;
+      // left: 100px;
+      translate: 100px;
+    }
+
+    75% {
+      width: 150px;
+      // left: 75px;
+      translate: 75px;
     }
 
     100% {
