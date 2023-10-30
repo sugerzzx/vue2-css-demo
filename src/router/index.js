@@ -19,8 +19,12 @@ const routes = [
   },
   {
     path: '/indicators',
-    component: () => import('../views/IndicatorsView.vue')
-  }
+    component: () => import('../views/formCodePen/IndicatorsView.vue')
+  },
+  {
+    path: '/worm',
+    component: () => import('../views/formCodePen/WormView.vue')
+  },
 ];
 
 const router = new VueRouter({

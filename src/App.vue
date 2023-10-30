@@ -5,6 +5,11 @@
 </template>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 body {
   margin: 0;
 }

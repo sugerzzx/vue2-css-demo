@@ -10,14 +10,18 @@
           <div class="indicator-list">
             <div :class="{ indicator: true, isCurrent: currentIndex === index }" v-for="(item, index) in picList.length"
               :key="index"></div>
-            <div class="currentIndicator" ref="currentIndicator"></div>
+            <div class="current-indicator" ref="currentIndicator">
+              <div class="cur-ind-segment" v-for="(item, index) in 7" :key="index"></div>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
     <button @click="handleSwipe">Next</button>
-    <div class="rectangle" @click="test"></div>
+    <div :class="{ worm: true, 'worm-moved': wormMoved }" @click="handleClick">
+      <div class="worm__segment" v-for="(item, index) in 30" :key="index"></div>
+    </div>
   </div>
 </template>
 
@@ -32,24 +36,17 @@ export default {
       ],
       currentIndex: 0,
       // isSwiping: false,
+      wormMoved: false,
     };
   },
   methods: {
     handleSwipe() {
       this.currentIndex = (this.currentIndex + 1) % this.picList.length;
     },
-    handleIndicatorSwipe() {
-
+    handleClick() {
+      console.log('click');
+      this.wormMoved = !this.wormMoved;
     },
-    test() {
-      // JavaScript 触发样式改变
-      const box = document.querySelector('.rectangle');
-      box.classList.add('move');
-      // 一段时间后
-      // setTimeout(() => {
-      //   box.classList.remove('move');
-      // }, 3000);
-    }
   },
   watch: {
     currentIndex() {
@@ -60,29 +57,30 @@ export default {
     }
   },
   mounted() {
-    this.handleIndicatorSwipe();
+    // this.handleIndicatorSwipe();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$tab-count: 3;
+$picCount: 3;
 $transition-duration: 0.8s;
+$imgWidth: 5000;
+$imgHeight: 3334;
+$ratio: $imgHeight/$imgWidth;
+$segmentNum: 7;
 
 .swipe-view {
   height: 300vh;
 
   .swipe-container {
-    height: 250px;
-    width: 100%;
+    height: calc(100vw*$ratio);
     position: relative;
     overflow: hidden;
-    // border: 1px solid black;
-    // background: rgb(223, 223, 223);
 
     .img-indicator-container {
+      height: calc(90vw*$ratio);
       width: 90%;
-      height: 74%;
       position: absolute;
       left: 0;
       right: 0;
@@ -92,7 +90,6 @@ $transition-duration: 0.8s;
 
       img {
         width: 100%;
-        object-fit: contain;
         position: absolute;
         border-radius: 15px;
       }
@@ -125,123 +122,109 @@ $transition-duration: 0.8s;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: 0;
+      bottom: 0px;
 
       .indicator-list {
         display: flex;
-        gap: 8px;
+        gap: 12px;
+        position: relative;
 
         .indicator {
-          width: 8px;
-          height: 8px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
-          background-color: #fff;
-          opacity: 0.7;
-        }
+          background-color: #ffffff;
+          opacity: 0.9;
 
-        .currentIndicator {
-          width: 16px;
-          height: 8px;
-          border-radius: 4px;
-          background-color: #fff;
+          @for $i from 1 through $picCount {
+            &:nth-child(#{$i}).isCurrent~.current-indicator {
+              .cur-ind-segment {
+                transform: translateX(#{18px * ($i - 1)});
+              }
+            }
+          }
+
+          @for $i from 2 through $picCount {
+            &:nth-child(#{$i}).isCurrent~.current-indicator {
+              @for $i from 2 through $segmentNum {
+                $delay: $transition-duration/70 * ($i - 1);
+
+                .cur-ind-segment:nth-last-child(#{$i}) {
+                  transition-delay: $delay;
+                }
+              }
+            }
+          }
+
+          &:nth-child(1).isCurrent~.current-indicator {
+            @for $i from 2 through $segmentNum {
+              $delay: $transition-duration/70 * ($i - 1);
+
+              .cur-ind-segment:nth-child(#{$i}) {
+                transition-delay: $delay;
+              }
+            }
+          }
+        }
+      }
+
+      .current-indicator {
+        position: absolute;
+        width: 100%;
+
+        .cur-ind-segment {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #ffffff;
           position: absolute;
-          // left: ;
-          translate: -25%;
-          // transition: transform $transition-duration linear;
-        }
+          transition: transform $transition-duration ease-in-out;
 
-        @mixin indicatorAni($i) {
-          @keyframes strtchAndSlide {
-            0% {
-              width: 16px;
-              left: #{100% * ($i - 1)/5};
+          @for $i from 1 through $segmentNum {
+            &:nth-of-type(#{$i}) {
+              left: #{($i - 1) * 1 - 3}px;
             }
-
-            50% {
-              width: 20px;
-              left: #{100% * ($i - 1)/5};
-            }
-
-            100% {
-              width: 16px;
-              left: #{100% * $i/5};
-            }
-          }
-        }
-
-        @for $i from 1 through $tab-count {
-          .indicator:nth-child(#{$i}).isCurrent~.currentIndicator {
-            // transform: translateX(#{100% * ($i - 1)});
-            @include indicatorAni($i);
-            // animation: strtchAndSlide $transition-duration linear;
-
-            &.moving {
-              animation: strtchAndSlide $transition-duration linear;
-            }
-          }
-        }
-
-        // .currentIndicator.moving {
-        //   animation: stretch $transition-duration linear;
-        // }
-
-        @keyframes stretch {
-          0% {
-            width: 16px;
-          }
-
-          50% {
-            width: 20px;
-          }
-
-          100% {
-            width: 16px;
           }
         }
       }
     }
   }
+}
 
-  .rectangle {
-    width: 100px;
+
+.worm {
+  height: 50px;
+  position: relative;
+
+  .worm__segment {
+    width: 50px;
     height: 50px;
-    border-radius: 25px;
-    background-color: rgb(80, 194, 240);
-    position: relative;
+    background-color: #845EC2;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.8s linear;
   }
 
-  .rectangle.move {
-    animation: stretchAndMove 1s ease-in-out forwards;
+  @for $i from 1 through 30 {
+    .worm__segment:nth-child(#{$i}) {
+      left: #{$i * 2}px;
+    }
+
+    &.worm-moved {
+      .worm__segment:nth-child(#{$i}) {
+        transform: translateX(80px);
+      }
+    }
   }
 
-  @keyframes stretchAndMove {
-    0% {
-      width: 100px;
-      // left: 0;
-      translate: 0;
-    }
 
-    25% {
-      width: 150px;
-      // left: 50px;
-      translate: 50px;
-    }
+  @for $i from 2 through 30 {
+    $delay: 0.8s/40 * ($i - 1);
 
-    50% {
-      width: 200px;
-      // left: 100px;
-      translate: 100px;
-    }
-
-    75% {
-      width: 150px;
-      // left: 75px;
-      translate: 75px;
-    }
-
-    100% {
-      width: 100px;
-      left: 100px;
+    .worm__segment:nth-last-child(#{$i}) {
+      transition-delay: $delay;
     }
   }
 }
