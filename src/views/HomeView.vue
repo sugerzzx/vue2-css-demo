@@ -5,6 +5,7 @@
       <router-link to="/canvas">Canvas</router-link>
       <router-link to="/indicators">Indicators</router-link>
       <router-link to="/worm">Worm</router-link>
+      <router-link to="/animationApi">AniApi</router-link>
     </nav>
     <router-view />
   </div>

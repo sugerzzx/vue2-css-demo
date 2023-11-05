@@ -25,6 +25,10 @@ const routes = [
     path: '/worm',
     component: () => import('../views/formCodePen/WormView.vue')
   },
+  {
+    path: '/animationApi',
+    component: () => import('../views/animationApi.vue')
+  }
 ];
 
 const router = new VueRouter({
