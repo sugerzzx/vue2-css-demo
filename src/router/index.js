@@ -27,7 +27,15 @@ const routes = [
   },
   {
     path: '/animationApi',
-    component: () => import('../views/animationApi.vue')
+    component: () => import('../views/AnimationApi.vue')
+  },
+  {
+    path: '/dragSwipe',
+    component: () => import('../views/DragSwipe.vue')
+  },
+  {
+    path: '/transitionGroup',
+    component: () => import('../views/TransitionGroup.vue')
   }
 ];
 

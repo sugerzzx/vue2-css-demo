@@ -36,9 +36,9 @@ export default {
           this.timeFrames = timeFrames;
           this.duration = duration;
           this.keyframes = {
-            transform: this.getTrnasform(this.positionSnapShot),
+            transform: this.getTrnasform(),
             opacity: [1, 1],
-            offset: this.getOffset(this.timeFrames, this.duration),
+            offset: this.getOffset(),
             easing: ['ease-in-out'],
           };
         }

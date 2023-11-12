@@ -6,6 +6,8 @@
       <router-link to="/indicators">Indicators</router-link>
       <router-link to="/worm">Worm</router-link>
       <router-link to="/animationApi">AniApi</router-link>
+      <router-link to="/dragSwipe">DragSwipe</router-link>
+      <router-link to="/transitionGroup">TransitionGroup</router-link>
     </nav>
     <router-view />
   </div>
