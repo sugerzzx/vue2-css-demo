@@ -32,7 +32,7 @@ export default {
       picList: [
         '/img/Scene-18.jpg',
         '/img/Scene-24.jpg',
-        '/img/Scene...8.jpg'
+        '/img/Scene-8.jpg'
       ],
       currentIndex: 0,
       // isSwiping: false,

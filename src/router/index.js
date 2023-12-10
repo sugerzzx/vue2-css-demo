@@ -36,6 +36,14 @@ const routes = [
   {
     path: '/observerView',
     component: () => import('../views/ObserverView.vue')
+  },
+  {
+    path: '/dragSwipe',
+    component: () => import('../views/DragSwipe.vue')
+  },
+  {
+    path: '/transitionGroup',
+    component: () => import('../views/TransitionGroup.vue')
   }
 ];
 

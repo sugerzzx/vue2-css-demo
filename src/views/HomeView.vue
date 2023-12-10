@@ -8,6 +8,8 @@
       <router-link to="/animationApi">AniApi</router-link>
       <router-link to="/iframeEffectToIntersection">IframeEffectToIntersection</router-link>
       <router-link to="/observerView">ObserverView</router-link>
+      <router-link to="/dragSwipe">DragSwipe</router-link>
+      <router-link to="/transitionGroup">TransitionGroup</router-link>
     </nav>
     <router-view />
   </div>
