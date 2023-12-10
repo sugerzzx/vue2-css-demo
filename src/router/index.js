@@ -27,7 +27,15 @@ const routes = [
   },
   {
     path: '/animationApi',
-    component: () => import('../views/animationApi.vue')
+    component: () => import('../views/AnimationApi.vue')
+  },
+  {
+    path: '/iframeEffectToIntersection',
+    component: () => import('../views/IframeEffectToIntersection.vue')
+  },
+  {
+    path: '/observerView',
+    component: () => import('../views/ObserverView.vue')
   }
 ];
 

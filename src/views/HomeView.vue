@@ -6,6 +6,8 @@
       <router-link to="/indicators">Indicators</router-link>
       <router-link to="/worm">Worm</router-link>
       <router-link to="/animationApi">AniApi</router-link>
+      <router-link to="/iframeEffectToIntersection">IframeEffectToIntersection</router-link>
+      <router-link to="/observerView">ObserverView</router-link>
     </nav>
     <router-view />
   </div>
