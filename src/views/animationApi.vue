@@ -113,6 +113,18 @@ export default {
         }
       }, options);
       observer.observe(this.$refs.container);
+    },
+    doSomething() {
+      let height = this.container.getBoundingClientRect().top;
+      const inquireDistance = () => {
+        const containerHeight = this.container.getBoundingClientRect().top;
+        if (containerHeight !== height) {
+          console.log('do something', containerHeight);
+          height = containerHeight;
+        }
+        requestAnimationFrame(inquireDistance);
+      };
+      inquireDistance();
     }
   },
   mounted() {
@@ -127,6 +139,7 @@ export default {
         }
       }
     });
+    this.doSomething();
   }
 };
 </script>
