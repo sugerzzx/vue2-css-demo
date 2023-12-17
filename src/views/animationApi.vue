@@ -140,6 +140,10 @@ export default {
       }
     });
     this.doSomething();
+    window.addEventListener('scroll', (e) => {
+      console.log('scroll');
+      e.preventDefault();
+    }, { passive: false });
   }
 };
 </script>
